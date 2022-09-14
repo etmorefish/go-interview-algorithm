@@ -23,9 +23,28 @@ func QuickSort(nums []int) []int {
 	low, high = QuickSort(low), QuickSort(high)
 	return append(append(low, mid...), high...)
 }
+
+func BubbleSort(nums []int, k int) []int {
+	l := len(nums)
+	for i := 0; i < l; i++ {
+		for j := 0; j < l-i-1; j++ {
+			if nums[j] > nums[j+1] {
+				nums[j], nums[j+1] = nums[j+1], nums[j]
+			}
+		}
+		fmt.Println(i+1, nums)
+		k--
+		if k == 0 {
+			return nums
+		}
+	}
+	return nums
+}
+
 func main() {
 	nums := []int{2, 9, 5, 3, 8, 1}
-	fmt.Println(QuickSort(nums))
-	fmt.Println(QuickSort(nums)[len(nums)-1])
+	// fmt.Println(QuickSort(nums))
+	// fmt.Println(QuickSort(nums)[len(nums)-1])
+	fmt.Println(BubbleSort(nums, 3))
 
 }
