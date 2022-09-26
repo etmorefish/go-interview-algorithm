@@ -41,10 +41,32 @@ func BubbleSort(nums []int, k int) []int {
 	return nums
 }
 
+func qk(nums []int) []int {
+	if len(nums) == 0 {
+		return nums
+	}
+	l, m, h := []int{}, []int{}, []int{}
+	flag := nums[0]
+	m = append(m, flag)
+	for i := 1; i < len(nums); i++ {
+		if nums[i] > flag {
+			h = append(h, nums[i])
+		} else if nums[i] < flag {
+			l = append(l, nums[i])
+		} else {
+			m = append(m, nums[i])
+		}
+	}
+	l, h = qk(l), qk(h)
+	return append(append(l, m...), h...)
+
+}
+
 func main() {
 	nums := []int{2, 9, 5, 3, 8, 1}
 	// fmt.Println(QuickSort(nums))
 	// fmt.Println(QuickSort(nums)[len(nums)-1])
-	fmt.Println(BubbleSort(nums, 3))
+	// fmt.Println(BubbleSort(nums, 3))
+	fmt.Println(qk(nums))
 
 }
